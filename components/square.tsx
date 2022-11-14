@@ -6,11 +6,11 @@ function Square({value, onClick, winner}:{
     onClick:()=>void
 }){
     if(!value){
-        return <button onClick={onClick} disabled={Boolean(winner)}/>
+        return <button className="square" onClick={onClick} disabled={Boolean(winner)}/>
     }
     return(
         <div>
-            <button>{value}</button>
+            <button className={'square square_${value.toLowerCase}'} disabled> {value}</button>
         </div>
     )
 }

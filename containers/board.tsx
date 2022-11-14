@@ -28,8 +28,10 @@ function Board(){
     return(
         <div>
            <p>hello</p> {currentPlayer}
+           <div className='grid'>
            {Array(9).fill(null).map((_, i)=>{
             return <Square 
+        
             key={i}
             //create a onclick handler to set the value of the square
             onClick={()=>setSquareValue(i)}
@@ -39,6 +41,7 @@ function Board(){
 })
             
            }
+           </div>
         
         </div>
     )
