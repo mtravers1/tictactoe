@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { resourceLimits } from 'worker_threads'
 import Square from '../components/square'
 
 
@@ -11,7 +12,13 @@ function Board(){
     const [currentPlayer, setCurrentPlayer]=useState<'X'|'O'>(
         Math.round(Math.random() *1)===1 ?"X":"O")
     const [winner, setWinner]=useState(null)
+    
+    function reset(){
+        setSquare(Array(9).fill(null))
+        setWinner(null)     
+        setCurrentPlayer(Math.round(Math.random() *1)===1 ?"X":"O")
 
+    }
     function setSquareValue(index){
         //set value of the element to the player
         const newData= square.map((val, i)=>{
@@ -24,6 +31,8 @@ function Board(){
         setSquare(newData)
         //set current player to other player or if its currently X then change to O
         setCurrentPlayer(currentPlayer === "X"?"O":"X")
+
+      
     }
     return(
         <div>
@@ -31,7 +40,7 @@ function Board(){
            <div className='grid'>
            {Array(9).fill(null).map((_, i)=>{
             return <Square 
-        
+            winner={winner}
             key={i}
             //create a onclick handler to set the value of the square
             onClick={()=>setSquareValue(i)}
@@ -42,6 +51,7 @@ function Board(){
             
            }
            </div>
+           <button className='reset' onClick={reset}>RESET</button>
         
         </div>
     )
